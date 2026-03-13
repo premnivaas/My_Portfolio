@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prem Nivaas A — Java Full Stack Developer</title>
+<meta name="description" content="Prem Nivaas A — Java Full Stack Web Developer from Trichy, Tamil Nadu. Experienced in Java, JSP, Servlets, PHP, MySQL, MVC architecture and end-to-end web application development.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #0f0f17;
+  --card: #141420;
+  --border: #1f1f30;
+  --accent: #6c63ff;
+  --accent2: #00d4aa;
+  --accent3: #ff6b6b;
+  --text: #e0e0f0;
+  --muted: #7070a0;
+  --bright: #f4f4ff;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+.ambient { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.blob { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.08; animation: float 18s ease-in-out infinite alternate; }
+.blob1 { width: 700px; height: 700px; background: var(--accent); top: -300px; left: -200px; }
+.blob2 { width: 500px; height: 500px; background: var(--accent2); bottom: -100px; right: -200px; animation-delay: -8s; }
+.blob3 { width: 300px; height: 300px; background: var(--accent3); top: 40%; left: 45%; animation-delay: -14s; }
+@keyframes float { 0%{transform:translate(0,0) scale(1);} 100%{transform:translate(30px,50px) scale(1.08);} }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(10,10,15,0.88); backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  animation: navIn 0.5s ease both;
+}
+@keyframes navIn { from{transform:translateY(-100%);opacity:0;} to{transform:translateY(0);opacity:1;} }
+.nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--bright); }
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; letter-spacing: 0.07em; text-transform: uppercase; font-weight: 500; transition: color 0.3s; position: relative; }
+.nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; right:0; height:1px; background:var(--accent); transform:scaleX(0); transition:transform 0.3s; transform-origin:left; }
+.nav-links a:hover { color: var(--bright); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+.page { position: relative; z-index: 1; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 100px 48px; }
+.alt { background: var(--surface); }
+
+.section-tag { display:flex; align-items:center; gap:10px; color:var(--accent); font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:500; margin-bottom:16px; }
+.section-tag::before { content:''; width:28px; height:1px; background:var(--accent); }
+.section-title { font-family:'Syne',sans-serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:700; color:var(--bright); letter-spacing:-0.03em; margin-bottom:14px; line-height:1.1; }
+.section-sub { font-size:0.95rem; color:var(--muted); max-width:520px; margin-bottom:52px; }
+
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.65s ease, transform 0.65s ease; }
+.reveal.on { opacity:1; transform:translateY(0); }
+
+/* HERO */
+#hero { min-height:100vh; display:flex; align-items:center; max-width:1100px; margin:0 auto; padding:120px 48px 80px; position:relative; }
+.hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(108,99,255,0.1); border:1px solid rgba(108,99,255,0.28); padding:5px 14px; border-radius:100px; font-size:0.74rem; color:var(--accent2); letter-spacing:0.09em; text-transform:uppercase; margin-bottom:28px; animation:up 0.6s 0.2s ease both; }
+.dot { width:6px; height:6px; background:var(--accent2); border-radius:50%; animation:blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+.hero-name { font-family:'Syne',sans-serif; font-size:clamp(2.8rem,7vw,5rem); font-weight:800; letter-spacing:-0.04em; line-height:1.0; color:var(--bright); margin-bottom:18px; animation:up 0.6s 0.3s ease both; }
+.hero-name .grad { display:block; background:linear-gradient(120deg,var(--accent) 0%,var(--accent2) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero-role { font-size:1.05rem; color:var(--muted); margin-bottom:22px; animation:up 0.6s 0.4s ease both; }
+.hero-role strong { color:var(--text); font-weight:500; }
+.hero-summary { font-size:0.97rem; color:var(--muted); max-width:560px; margin-bottom:40px; line-height:1.75; animation:up 0.6s 0.5s ease both; }
+.hero-summary strong { color:var(--text); font-weight:500; }
+.hero-btns { display:flex; gap:14px; flex-wrap:wrap; animation:up 0.6s 0.6s ease both; }
+.btn { display:inline-flex; align-items:center; gap:7px; padding:11px 26px; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:0.88rem; font-weight:500; text-decoration:none; cursor:pointer; border:none; transition:all 0.3s ease; }
+.btn-fill { background:var(--accent); color:#fff; box-shadow:0 0 28px rgba(108,99,255,0.28); }
+.btn-fill:hover { background:#7d75ff; box-shadow:0 0 40px rgba(108,99,255,0.45); transform:translateY(-2px); }
+.btn-ghost { background:transparent; color:var(--text); border:1px solid var(--border); }
+.btn-ghost:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+.hero-contacts { display:flex; flex-wrap:wrap; gap:20px; margin-top:44px; animation:up 0.6s 0.7s ease both; }
+.hlink { display:flex; align-items:center; gap:7px; color:var(--muted); text-decoration:none; font-size:0.83rem; transition:color 0.3s; }
+.hlink:hover { color:var(--accent2); }
+.hlink svg { width:15px; height:15px; flex-shrink:0; }
+@keyframes up { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+.scroll-cue { position:absolute; bottom:36px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:6px; color:var(--muted); font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; animation:up 1s 1.2s ease both; }
+.scroll-line { width:1px; height:36px; background:linear-gradient(to bottom,var(--accent),transparent); animation:scrl 2s ease-in-out infinite; }
+@keyframes scrl { 0%{transform:scaleY(0);transform-origin:top;} 50%{transform:scaleY(1);transform-origin:top;} 51%{transform:scaleY(1);transform-origin:bottom;} 100%{transform:scaleY(0);transform-origin:bottom;} }
+
+/* STATS */
+.stats-row { display:flex; gap:48px; flex-wrap:wrap; }
+.stat-num { font-family:'Syne',sans-serif; font-size:2.2rem; font-weight:800; background:linear-gradient(120deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; }
+.stat-label { font-size:0.8rem; color:var(--muted); margin-top:4px; }
+
+/* SKILLS — always visible, no JS opacity tricks */
+.skills-cats { display:flex; flex-direction:column; gap:36px; }
+.cat-title { font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:700; color:var(--accent); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:14px; }
+.pills { display:flex; flex-wrap:wrap; gap:10px; }
+.pill { background:var(--card); border:1px solid var(--border); padding:8px 16px; border-radius:8px; font-size:0.84rem; color:var(--text); font-weight:400; transition:all 0.25s ease; cursor:default; }
+.pill:hover { border-color:var(--accent); color:var(--accent); background:rgba(108,99,255,0.08); transform:translateY(-2px); }
+.pill.g { border-color:rgba(0,212,170,0.18); }
+.pill.g:hover { border-color:var(--accent2); color:var(--accent2); background:rgba(0,212,170,0.08); }
+
+/* EXPERIENCE */
+.exp-item { display:grid; grid-template-columns:190px 1fr; gap:40px; padding:40px 0; border-bottom:1px solid var(--border); }
+.exp-item:last-child { border-bottom:none; }
+.exp-period { font-size:0.78rem; color:var(--accent2); font-weight:500; margin-bottom:4px; }
+.exp-location { font-size:0.76rem; color:var(--muted); margin-bottom:12px; }
+.exp-badge { display:inline-block; background:rgba(108,99,255,0.1); border:1px solid rgba(108,99,255,0.2); padding:4px 12px; border-radius:6px; font-size:0.72rem; color:var(--accent); }
+.exp-role { font-family:'Syne',sans-serif; font-size:1.15rem; font-weight:700; color:var(--bright); margin-bottom:5px; }
+.exp-company { font-size:0.88rem; color:var(--muted); margin-bottom:18px; }
+.exp-company a { color:var(--accent2); text-decoration:none; }
+.exp-points { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.exp-points li { font-size:0.88rem; color:var(--muted); padding-left:18px; position:relative; line-height:1.6; }
+.exp-points li::before { content:'▸'; position:absolute; left:0; color:var(--accent); font-size:0.7rem; top:3px; }
+.exp-points li strong { color:var(--text); font-weight:500; }
+.exp-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+.exp-tag { background:transparent; border:1px solid var(--border); color:var(--muted); font-size:0.72rem; padding:3px 10px; border-radius:100px; }
+
+/* PROJECTS */
+.proj-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:22px; }
+.proj-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:30px; position:relative; overflow:hidden; transition:all 0.35s ease; display:flex; flex-direction:column; }
+.proj-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(to right,var(--accent),var(--accent2)); transform:scaleX(0); transition:transform 0.35s ease; transform-origin:left; }
+.proj-card:hover::after { transform:scaleX(1); }
+.proj-card:hover { border-color:rgba(108,99,255,0.35); transform:translateY(-5px); box-shadow:0 24px 60px rgba(0,0,0,0.45); }
+.proj-num { font-family:'Syne',sans-serif; font-size:2.6rem; font-weight:800; color:var(--border); line-height:1; margin-bottom:18px; transition:color 0.3s; }
+.proj-card:hover .proj-num { color:rgba(108,99,255,0.18); }
+.proj-title { font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:700; color:var(--bright); margin-bottom:10px; }
+.proj-desc { font-size:0.86rem; color:var(--muted); margin-bottom:20px; line-height:1.65; flex:1; }
+.proj-tags { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:20px; }
+.proj-tag { background:rgba(108,99,255,0.09); border:1px solid rgba(108,99,255,0.2); color:var(--accent); font-size:0.7rem; padding:2px 9px; border-radius:100px; }
+.proj-metrics { display:flex; gap:20px; padding-top:18px; border-top:1px solid var(--border); }
+.m-val { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; color:var(--accent2); }
+.m-lbl { font-size:0.68rem; color:var(--muted); margin-top:1px; }
+
+/* EDU */
+.edu-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px; }
+.edu-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:26px; transition:all 0.3s; }
+.edu-card:hover { border-color:var(--accent); transform:translateY(-3px); }
+.edu-icon { font-size:1.6rem; margin-bottom:14px; }
+.edu-deg { font-family:'Syne',sans-serif; font-weight:700; font-size:0.95rem; color:var(--bright); margin-bottom:5px; }
+.edu-school { font-size:0.83rem; color:var(--muted); margin-bottom:4px; }
+.edu-year { font-size:0.76rem; color:var(--accent2); }
+
+/* CONTACT */
+.contact-wrap { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:60px 48px; max-width:640px; margin:0 auto; position:relative; overflow:hidden; text-align:center; }
+.contact-wrap::before { content:''; position:absolute; top:-1px; left:15%; right:15%; height:2px; background:linear-gradient(to right,transparent,var(--accent),var(--accent2),transparent); }
+.c-tagline { font-size:0.88rem; color:var(--muted); margin-bottom:10px; }
+.c-email { font-family:'Syne',sans-serif; font-size:clamp(1rem,3vw,1.5rem); font-weight:700; color:var(--bright); margin:8px 0 6px; }
+.c-phone { font-size:0.9rem; color:var(--muted); }
+.c-loc { font-size:0.82rem; color:var(--muted); margin-bottom:36px; }
+.c-btns { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+
+footer { text-align:center; padding:36px 48px; color:var(--muted); font-size:0.78rem; border-top:1px solid var(--border); position:relative; z-index:1; }
+
+.cursor { position:fixed; width:320px; height:320px; border-radius:50%; pointer-events:none; z-index:2; transform:translate(-50%,-50%); background:radial-gradient(circle, rgba(195, 193, 229, 0.05) 0%,transparent 70%); transition:left 0.12s ease,top 0.12s ease; }
+
+@media(max-width:768px){
+  nav{padding:14px 20px;}
+  .nav-links{display:none;}
+  #hero,.wrap{padding:100px 22px 60px;}
+  .exp-item{grid-template-columns:1fr;gap:8px;}
+  .proj-grid{grid-template-columns:1fr;}
+  .contact-wrap{padding:40px 22px;}
+  .stats-row{gap:24px;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="ambient">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+</div>
+
+<nav>
+  <div class="nav-logo">Prem<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+<!-- HERO -->
+<div style="position:relative;">
+<div id="hero">
+  <div>
+    <div class="hero-badge"><span class="dot"></span>Open to Full-Time &amp; Freelance Roles</div>
+    <h1 class="hero-name">
+      Prem Nivaas A
+      <span class="grad">Full Stack Developer</span>
+    </h1>
+    <p class="hero-role"><strong>Java · PHP · Web Applications</strong> &nbsp;·&nbsp; Trichy, Tamil Nadu, India</p>
+    <p class="hero-summary">
+      Java Full Stack Developer with <strong>1.5+ years</strong> of hands-on experience building and deploying
+      scalable real-time web applications. Skilled in <strong>Java, JSP, Servlets, PHP, MySQL, and MVC architecture</strong>
+      — with end-to-end ownership of development, hosting, and performance optimization.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-fill">View My Work</a>
+      <a href="#contact" class="btn btn-ghost">Hire Me</a>
+      <a href="https://github.com/premnivaas" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+    </div>
+    <div class="hero-contacts">
+      <a href="mailto:taprem2013@gmail.com" class="hlink">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        taprem2013@gmail.com
+      </a>
+      <a href="tel:+916382620945" class="hlink">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .98h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        +91 63826 20945
+      </a>
+      <a href="https://linkedin.com/in/premnivaas" target="_blank" class="hlink">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM6.62 20.45H4.07V9h2.55v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.21 24 24 23.23 24 22.28V1.72C24 .77 23.21 0 22.23 0z"/></svg>
+        linkedin.com/in/premnivaas
+      </a>
+      <a href="https://github.com/premnivaas" target="_blank" class="hlink">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.74-1.33-1.74-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23A11.5 11.5 0 0112 5.8c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        github.com/premnivaas
+      </a>
+    </div>
+  </div>
+</div>
+<div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
+</div>
+
+<!-- STATS -->
+<div class="alt">
+<div class="wrap reveal">
+  <div class="stats-row">
+    <div><div class="stat-num">1.5+</div><div class="stat-label">Years of Experience</div></div>
+    <div><div class="stat-num">3</div><div class="stat-label">Production Projects</div></div>
+    <div><div class="stat-num">25%</div><div class="stat-label">Query Speed Improved</div></div>
+    <div><div class="stat-num">70%</div><div class="stat-label">Repeat Questions Cut</div></div>
+    <div><div class="stat-num">100+</div><div class="stat-label">Live Users Served</div></div>
+  </div>
+</div>
+</div>
+
+<!-- SKILLS -->
+<div id="skills">
+<div class="wrap">
+  <div class="section-tag">Technical Expertise</div>
+  <h2 class="section-title reveal">Skills &amp; Technologies</h2>
+  <p class="section-sub reveal">A practical skill set built through production projects — from backend logic to front-end interfaces and live deployments.</p>
+
+  <div class="skills-cats">
+    <div class="reveal">
+      <div class="cat-title">Backend Development</div>
+      <div class="pills">
+        <span class="pill">Java</span>
+        <span class="pill">Core Java</span>
+        <span class="pill">OOP</span>
+        <span class="pill">Collections Framework</span>
+        <span class="pill">JSP</span>
+        <span class="pill">Servlets</span>
+        <span class="pill">JDBC</span>
+        <span class="pill">MVC Architecture</span>
+        <span class="pill">PHP</span>
+        <span class="pill">JavaMail API</span>
+        <span class="pill">API Key Integration</span>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="cat-title">Frontend Development</div>
+      <div class="pills">
+        <span class="pill g">HTML5</span>
+        <span class="pill g">CSS3</span>
+        <span class="pill g">JavaScript</span>
+        <span class="pill g">Chart.js</span>
+        <span class="pill g">Responsive Design</span>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="cat-title">Database &amp; Query Optimization</div>
+      <div class="pills">
+        <span class="pill">MySQL</span>
+        <span class="pill">SQL Joins</span>
+        <span class="pill">Indexing</span>
+        <span class="pill">Transactions</span>
+        <span class="pill">MySQL Workbench</span>
+        <span class="pill">Query Optimization</span>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="cat-title">Tools, Servers &amp; Deployment</div>
+      <div class="pills">
+        <span class="pill">Eclipse JEE</span>
+        <span class="pill">Maven</span>
+        <span class="pill">Apache Tomcat v9–11</span>
+        <span class="pill">Git</span>
+        <span class="pill">GitHub</span>
+        <span class="pill">Web Hosting</span>
+        <span class="pill">Server Management</span>
+        <span class="pill">Production Deployment</span>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="cat-title">Practices &amp; Marketing</div>
+      <div class="pills">
+        <span class="pill g">SDLC</span>
+        <span class="pill g">Agile / Scrum</span>
+        <span class="pill g">Google Maps API</span>
+        <span class="pill g">SEO</span>
+        <span class="pill g">Google Ads</span>
+        <span class="pill g">Meta Ads</span>
+        <span class="pill g">Analytics &amp; Tag Manager</span>
+        <span class="pill g">Performance Optimization</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="alt" id="experience">
+<div class="wrap">
+  <div class="section-tag">Career</div>
+  <h2 class="section-title reveal">Work Experience</h2>
+  <p class="section-sub reveal">Hands-on experience delivering full-stack solutions — from enterprise Java applications to live freelance product launches.</p>
+
+  <div class="exp-item reveal">
+    <div>
+      <div class="exp-period">Dec 2025 – Present</div>
+      <div class="exp-location">Trichy, India</div>
+      <div class="exp-badge">Current Role</div>
+    </div>
+    <div>
+      <div class="exp-role">Java Full Stack Developer — Freelance</div>
+      <div class="exp-company">AIMHS Academy &nbsp;·&nbsp; <a href="https://aimhsacademy.online" target="_blank">aimhsacademy.online ↗</a></div>
+      <ul class="exp-points">
+        <li>Delivering end-to-end freelance web development using <strong>PHP, MySQL, HTML, CSS, JavaScript</strong> with eCommerce features and full server management.</li>
+        <li>Independently handling the complete <strong>SDLC</strong>: requirements, development, testing, production deployment, and ongoing maintenance.</li>
+        <li>Managing <strong>SEO, Digital Marketing, Google Ads &amp; Meta Ads</strong> to improve online visibility and lead generation for the client.</li>
+        <li>Owning performance tuning, uptime monitoring, and troubleshooting in a live production environment.</li>
+      </ul>
+      <div class="exp-tags">
+        <span class="exp-tag">PHP</span><span class="exp-tag">MySQL</span><span class="exp-tag">JavaScript</span>
+        <span class="exp-tag">SEO</span><span class="exp-tag">Server Management</span><span class="exp-tag">Freelance</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-item reveal">
+    <div>
+      <div class="exp-period">Aug 2024 – Dec 2025</div>
+      <div class="exp-location">Trichy, India</div>
+      <div class="exp-badge">Greensoft Groups</div>
+    </div>
+    <div>
+      <div class="exp-role">Java Full Stack Web Developer</div>
+      <div class="exp-company">Greensoft Groups</div>
+      <ul class="exp-points">
+        <li>Built and maintained real-time web applications using <strong>Java, JSP, Servlets, JDBC, and MVC architecture</strong> — ensuring modular, scalable codebases.</li>
+        <li>Optimized <strong>SQL queries (joins, indexing, transactions)</strong>, reducing query execution time by approximately <strong>25%</strong>.</li>
+        <li>Applied <strong>Core Java OOP and Collections</strong> to build reusable backend services, improving code maintainability.</li>
+        <li>Participated in <strong>Agile/Scrum sprints</strong> — planning, reviews, and testing — contributing to <strong>15% faster delivery</strong>.</li>
+        <li>Set up deployment pipelines using <strong>Eclipse JEE, Maven, and Apache Tomcat (v9–11)</strong> across dev and test environments.</li>
+        <li>Maintained <strong>100% code traceability</strong> via Git and GitHub for the entire team.</li>
+      </ul>
+      <div class="exp-tags">
+        <span class="exp-tag">Java</span><span class="exp-tag">JSP</span><span class="exp-tag">Servlets</span>
+        <span class="exp-tag">JDBC</span><span class="exp-tag">MySQL</span><span class="exp-tag">MVC</span>
+        <span class="exp-tag">Maven</span><span class="exp-tag">Git</span><span class="exp-tag">Agile</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PROJECTS -->
+<div id="projects">
+<div class="wrap">
+  <div class="section-tag">Portfolio</div>
+  <h2 class="section-title reveal">Featured Projects</h2>
+  <p class="section-sub reveal">Real-world projects built and shipped — each owned from architecture to deployment.</p>
+
+  <div class="proj-grid">
+    <div class="proj-card reveal">
+      <div class="proj-num">01</div>
+      <div class="proj-title">AI-Powered SmartFAQ System</div>
+      <div class="proj-desc">Three-tier FAQ platform with an AI chatbot, Q&amp;A workflows, and admin dashboard. Built for 100+ test users with a search-first mechanism and Chart.js analytics to surface trending questions automatically.</div>
+      <div class="proj-tags">
+        <span class="proj-tag">Java</span><span class="proj-tag">JSP</span><span class="proj-tag">Servlets</span>
+        <span class="proj-tag">MySQL</span><span class="proj-tag">Chart.js</span><span class="proj-tag">AI API</span>
+      </div>
+      <div class="proj-metrics">
+        <div><div class="m-val">40%</div><div class="m-lbl">Admin load cut</div></div>
+        <div><div class="m-val">70%</div><div class="m-lbl">Repeat Q's reduced</div></div>
+        <div><div class="m-val">100+</div><div class="m-lbl">Test users</div></div>
+      </div>
+    </div>
+
+    <div class="proj-card reveal" style="transition-delay:0.1s">
+      <div class="proj-num">02</div>
+      <div class="proj-title">Crime Reporting &amp; SOS System</div>
+      <div class="proj-desc">Anonymous crime reporting app with real-time SOS alerts, Google Maps integration for location pinning, and automated admin resolution workflows. Designed for fast alert delivery under 10 seconds.</div>
+      <div class="proj-tags">
+        <span class="proj-tag">Java</span><span class="proj-tag">JSP</span><span class="proj-tag">JavaMail API</span>
+        <span class="proj-tag">Google Maps</span><span class="proj-tag">MySQL</span>
+      </div>
+      <div class="proj-metrics">
+        <div><div class="m-val">&lt;10s</div><div class="m-lbl">Alert delivery</div></div>
+        <div><div class="m-val">30%</div><div class="m-lbl">Delays reduced</div></div>
+        <div><div class="m-val">50+</div><div class="m-lbl">Reports handled</div></div>
+      </div>
+    </div>
+
+    <div class="proj-card reveal" style="transition-delay:0.2s">
+      <div class="proj-num">03</div>
+      <div class="proj-title">AIMHS Academy — Digital Platform</div>
+      <div class="proj-desc">Full production PHP website with hosting, deployment, uptime monitoring, and digital marketing. Includes live Google Ads and Meta Ads campaigns with Analytics and Tag Manager for measurable lead acquisition.</div>
+      <div class="proj-tags">
+        <span class="proj-tag">PHP</span><span class="proj-tag">MySQL</span><span class="proj-tag">Google Ads</span>
+        <span class="proj-tag">Meta Ads</span><span class="proj-tag">SEO</span><span class="proj-tag">Analytics</span>
+      </div>
+      <div class="proj-metrics">
+        <div><div class="m-val">Live</div><div class="m-lbl">Production site</div></div>
+        <div><div class="m-val">E2E</div><div class="m-lbl">Freelance owned</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- EDUCATION -->
+<div class="alt" id="education">
+<div class="wrap">
+  <div class="section-tag">Background</div>
+  <h2 class="section-title reveal">Education &amp; Certifications</h2>
+  <div class="edu-grid reveal">
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div class="edu-deg">Bachelor of Computer Application</div>
+      <div class="edu-school">Bishop Heber College, Trichy</div>
+      <div class="edu-year">June 2021 – April 2024 &nbsp;·&nbsp; CGPA 6.24</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🤖</div>
+      <div class="edu-deg">Machine Learning Certification</div>
+      <div class="edu-school">Intellipaat Academy</div>
+      <div class="edu-year">2025 &nbsp;·&nbsp; AI, LLMs &amp; ML Systems</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">☁️</div>
+      <div class="edu-deg">Cloud Foundations</div>
+      <div class="edu-school">GreatLearning Academy</div>
+      <div class="edu-year">February 2024</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact">
+<div class="wrap" style="text-align:center;">
+  <div class="section-tag" style="justify-content:center;">Get In Touch</div>
+  <h2 class="section-title reveal">Let's Work Together</h2>
+  <div class="contact-wrap reveal">
+    <p class="c-tagline">Looking for a dedicated Full Stack Developer? I'm actively open to opportunities.</p>
+    <div class="c-email">taprem2013@gmail.com</div>
+    <div class="c-phone">+91 63826 20945</div>
+    <div class="c-loc">📍 Tiruchirappalli, Tamil Nadu, India</div>
+    <div class="c-btns">
+      <a href="mailto:taprem2013@gmail.com" class="btn btn-fill">Send Email</a>
+      <a href="https://linkedin.com/in/premnivaas" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+      <a href="https://github.com/premnivaas" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+      <a href="https://aimhsacademy.online" target="_blank" class="btn btn-ghost">Live Project ↗</a>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+
+<footer>Built by Prem Nivaas A &nbsp;·&nbsp; Java Full Stack Developer &nbsp;·&nbsp; Trichy, Tamil Nadu</footer>
+
+<script>
+  document.getElementById('cur') && document.addEventListener('mousemove', e => {
+    const c = document.getElementById('cur');
+    c.style.left = e.clientX + 'px';
+    c.style.top = e.clientY + 'px';
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  const navAs = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    navAs.forEach(a => {
+      const id = a.getAttribute('href').replace('#','');
+      const sec = document.getElementById(id);
+      if (sec) {
+        const top = sec.offsetTop - 200;
+        const bot = top + sec.offsetHeight;
+        a.style.color = window.scrollY >= top && window.scrollY < bot ? 'var(--bright)' : '';
+      }
+    });
+  });
+</script>
+</body>
+</html>
